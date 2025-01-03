@@ -3,7 +3,7 @@ import React from "react";
 import connectDB from "../database/db"
 import Project from "../database/projectSchema";
 
-async function getBlogs(){
+async function getProjects(){
   await connectDB() 
 
   try {
