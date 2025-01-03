@@ -1,8 +1,20 @@
 import React from "react";
 import blogs from "../blogData";
 import BlogPreview from "../components/blogPreview";
-import { Blog } from "../blogData"; 
-import style from '../components/blogPreview.module.css'
+//import { Blog }from "../blogData"; 
+import connectDB from "../database/db"
+import Blog from "../database/blogSchema";
+
+async function getBlogs(){
+    await connectDB() 
+  
+    try {
+        const blogs = await Blog.find().sort({ date: -1 }).orFail()
+        return blogs;
+    } catch (err) {
+        return null
+    }
+  }
 
 export default function Blogs(props: Blog){
     return(
