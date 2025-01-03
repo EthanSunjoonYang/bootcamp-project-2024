@@ -2,10 +2,10 @@ import React from 'react';
 import Project from "../database/projectSchema"; 
 
 
-export default function BlogPreview({ title, description, image,}: Project) {
+export default function BlogPreview({ title, description, image, slug}: Project) {
     return (
         <div className="project">
-        <a href="/">
+        <a href={slug}>
           <img src={image} alt="an image"/>
         </a>
         <div className="project-details">
