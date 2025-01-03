@@ -15,13 +15,13 @@ async function getProjects(){
   }
 }
 
-type BlogsProps = {
+type ProjectProps = {
   projects: Project[];
 };
 
-export default function Blogs({ projects }: BlogsProps) {
+export default function Projects({ projects }: ProjectProps) {
   return (
-    <div className="blogs">
+    <div className="projects">
       {projects.map((project) => (
         <ProjectPreview
           key={project.slug} // Ensure unique key
