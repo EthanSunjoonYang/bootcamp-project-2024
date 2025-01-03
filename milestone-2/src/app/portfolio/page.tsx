@@ -1,3 +1,19 @@
+import React from "react";
+//import { Blog }from "../blogData"; 
+import connectDB from "../database/db"
+import Project from "../database/projectSchema";
+
+async function getBlogs(){
+  await connectDB() 
+
+  try {
+      const blogs = await Project.find().sort({ date: -1 }).orFail()
+      return blogs;
+  } catch (err) {
+      return null
+  }
+}
+
 export default function Portfolio() {
     return (
         <div className="project">
