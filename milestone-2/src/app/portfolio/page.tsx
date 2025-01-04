@@ -16,17 +16,22 @@ async function getProjects(){
   }
 }
 
-export default function Projects(props: Project){
-  return(
-  <div className = 'projects'>
-        {projects.map(project => 
-    <ProjectPreview 
-    title={project.title}
-    description={project.description}
-    image={project.image}
-    slug={project.slug}
-    /> 
-  )}
-  </div>
-  );
+
+  export default async function Projects() {
+    const projects = await getProjects();
+    if (!projects || projects.length === 0) {
+        return <div>No projects available.</div>;
+      }
+    return(
+        <div className = 'project'>
+              {projects.map(project => 
+          <ProjectPreview 
+          title={project.title}
+          description={project.description}
+          image={project.image}
+          slug={project.slug}
+          /> 
+            )}
+        </div>
+    );
 }

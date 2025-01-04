@@ -14,21 +14,25 @@ async function getBlogs(){
     } catch (err) {
         return null
     }
-  }
+}
 
-export default function Blogs(props: Blog){
+  export default async function Blogs() {
+    const blogs = await getBlogs();
+    if (!blogs || blogs.length === 0) {
+        return <div>No blogs available.</div>;
+      }
     return(
-    <div className = 'blogs'>
-          {blogs.map(blog => 
-      <BlogPreview 
-      title={blog.title}
-      description={blog.description}
-      image={blog.image}
-      imageAlt="an image"
-      date={blog.date}
-      slug={blog.slug}
-      /> 
-		)}
-    </div>
+        <div className = 'blogs'>
+              {blogs.map(blog => 
+          <BlogPreview 
+          title={blog.title}
+          description={blog.description}
+          image={blog.image}
+          imageAlt="an image"
+          date={blog.date.toLocaleString()}
+          slug={blog.slug}
+          /> 
+            )}
+        </div>
     );
 }
