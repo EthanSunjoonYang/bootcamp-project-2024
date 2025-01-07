@@ -25,13 +25,12 @@ async function getBlogs(){
         <div className = 'blogs'>
               {blogs.map(blog => 
           <BlogPreview 
-          title={blog.title}
-          description={blog.description}
-          image={blog.image}
-          imageAlt="an image"
-          date={blog.date.toLocaleString()}
-          slug={blog.slug}
-          /> 
+                      title={blog.title}
+                      description={blog.description}
+                      image={blog.image}
+                      image_alt="an image"
+                      date={blog.date.toLocaleDateString()}
+                      slug={blog.slug} content={""} comments={[]}          /> 
             )}
         </div>
     );

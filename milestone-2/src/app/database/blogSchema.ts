@@ -1,4 +1,5 @@
 import mongoose, { Schema } from "mongoose";
+import { ReactNode } from "react";
 
 // typescript type (can also be an interface)
 type Blog = {
@@ -12,6 +13,11 @@ type Blog = {
 		comments: Comment[]; // array for comments
 };
 
+export type IComment = {
+	user: string;
+	comment: string;
+	time: Date;
+  }
 
 // mongoose schema 
 const blogSchema = new Schema<Blog>({
@@ -23,6 +29,12 @@ const blogSchema = new Schema<Blog>({
 	    image_alt: { type: String, required: true },
 		content: { type: String, required: true },
 })
+
+const commentSchema = new Schema<IComment>({
+	user: { type: String, required: true },
+	comment: { type: String, required: true },
+	time: { type: Date, default: Date.now }
+  });
 
 // defining the collection and model
 const Blog = mongoose.models['blogs'] ||
