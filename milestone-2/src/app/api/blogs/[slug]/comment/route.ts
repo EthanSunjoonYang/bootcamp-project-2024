@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 
-export async function POST(req: Request, { params }: { params: { slug: string } }) {
+export async function POST(req: Request, { params }: { params: { slug: Promise<{ id: string }> } }) {
     try {
         const body = await req.json();
         const { user, comment } = body;
