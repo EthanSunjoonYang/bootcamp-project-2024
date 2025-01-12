@@ -6,7 +6,7 @@ import Link from 'next/link';
 export default function BlogPreview({ title, description, image, slug}: Project) {
     return (
         <div className="project">
-        <Link href={slug}>
+        <Link href="/">
           <img src={image} alt="an image"/>
         </Link>
         <div className="project-details">
