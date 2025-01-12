@@ -2,9 +2,9 @@ import { NextRequest, NextResponse } from 'next/server';
 import connectDB from '../../../database/db';
 import blogSchema from '../../../database/blogSchema';
 
-export async function GET(req: NextRequest, context: { params: { slug: string } }) {
-    await connectDB(); 
-    const { slug } = context.params; 
+export async function GET(req: NextRequest, { params }: { params: Record<string, string> }) {
+    await connectDB(); // Connect to the database
+    const { slug } = params; // Destructure slug from params
 
     try {
         const blog = await blogSchema.findOne({ slug }).orFail();
@@ -13,6 +13,7 @@ export async function GET(req: NextRequest, context: { params: { slug: string } 
         return NextResponse.json('Blog not found.' + ' Error: ' + err, { status: 404 })
     }
 }
+
 
 
 // import { NextRequest, NextResponse } from 'next/server'
