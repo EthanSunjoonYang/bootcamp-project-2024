@@ -1,6 +1,6 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 
-export async function POST(req: Request, { params }: { params: { slug: Promise<{ id: string }> } }) {
+export async function POST(req: NextRequest) {
     try {
         const body = await req.json();
         const { user, comment } = body;
@@ -13,7 +13,7 @@ export async function POST(req: Request, { params }: { params: { slug: Promise<{
         }
 
         // Simulate saving the comment (replace with actual DB logic)
-        console.log(`Comment received for blog "${params.slug}":`, { user, comment });
+        console.log(`Comment received for blog "${body.slug}":`, { user, comment });
 
         return NextResponse.json({ message: 'Comment submitted successfully.' });
     } catch (error) {
