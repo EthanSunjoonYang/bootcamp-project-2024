@@ -2,9 +2,9 @@ import { NextRequest, NextResponse } from 'next/server';
 import connectDB from '../../../database/db';
 import blogSchema from '../../../database/blogSchema';
 
-export async function GET(req: NextRequest, { params }: { params: { slug: string } }) {
+export async function GET(req: NextRequest, context: { params: { slug: string } }) {
     await connectDB(); 
-    const { slug } = params;
+    const { slug } = context.params; 
 
     try {
         const blog = await blogSchema.findOne({ slug }).orFail();
