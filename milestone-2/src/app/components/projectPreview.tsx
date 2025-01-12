@@ -3,7 +3,7 @@ import Project from "../database/projectSchema";
 import Link from 'next/link';
 
 
-export default function BlogPreview({ title, description, image, slug}: Project) {
+export default function BlogPreview({ title, description, image}: Project) {
     return (
         <div className="project">
         <Link href="/">
