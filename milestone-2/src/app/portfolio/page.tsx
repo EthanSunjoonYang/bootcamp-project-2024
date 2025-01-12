@@ -3,7 +3,6 @@ import React from "react";
 import connectDB from "../database/db"
 import Project from "../database/projectSchema";
 import ProjectPreview from "../components/projectPreview";
-import projects from "../projectData"
 
 async function getProjects(){
   await connectDB() 
@@ -12,6 +11,7 @@ async function getProjects(){
       const projects = await Project.find().sort({ date: -1 }).orFail()
       return projects;
   } catch (err) {
+      console.log(err)
       return null
   }
 }
@@ -25,7 +25,8 @@ async function getProjects(){
     return(
         <div className = 'project'>
               {projects.map(project => 
-          <ProjectPreview 
+          <ProjectPreview
+          key={project.title + project.slug}
           title={project.title}
           description={project.description}
           image={project.image}

@@ -6,11 +6,6 @@ import { Key } from "react";
 type Props = {
   params: { slug: string };
 };
-type CommentType = {
-  user: string;
-  content: string;
-  time: Date;
-};
 
 async function getBlog(slug: string) {
   try {
@@ -31,20 +26,6 @@ async function getBlog(slug: string) {
     // Instead of "error: " + err, we can just do the above
     // it is simular to formated strings in python --> f"{err}"
   }
-}
-
-function dataToComment(data: any) {
-  console.log("data", data);
-  return (
-    <Comment
-      key={data.user + data.time}
-      comment={{
-        user: data.user,
-        comment: data.comment,
-        time: data.time,
-      }}
-    ></Comment>
-  );
 }
 
 export default async function Blogs({ params: { slug } }: Props) {

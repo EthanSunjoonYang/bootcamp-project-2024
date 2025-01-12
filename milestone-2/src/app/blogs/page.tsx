@@ -1,5 +1,4 @@
 import React from "react";
-import blogs from "../blogData";
 import BlogPreview from "../components/blogPreview";
 //import { Blog }from "../blogData"; 
 import connectDB from "../database/db"
@@ -12,6 +11,7 @@ async function getBlogs(){
         const blogs = await Blog.find().sort({ date: -1 }).orFail()
         return blogs;
     } catch (err) {
+        console.log(err)
         return null
     }
 }
@@ -24,7 +24,8 @@ async function getBlogs(){
     return(
         <div className = 'blogs'>
               {blogs.map(blog => 
-          <BlogPreview 
+          <BlogPreview
+                      key={blog.title + blog.slug}  
                       title={blog.title}
                       description={blog.description}
                       image={blog.image}

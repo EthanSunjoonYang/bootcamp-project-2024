@@ -1,5 +1,4 @@
 import mongoose, { Schema } from "mongoose";
-import { ReactNode } from "react";
 
 // typescript type (can also be an interface)
 type Blog = {
@@ -30,11 +29,11 @@ const blogSchema = new Schema<Blog>({
 		content: { type: String, required: true },
 })
 
-const commentSchema = new Schema<IComment>({
-	user: { type: String, required: true },
-	comment: { type: String, required: true },
-	time: { type: Date, default: Date.now }
-  });
+// const commentSchema = new Schema<IComment>({
+// 	user: { type: String, required: true },
+// 	comment: { type: String, required: true },
+// 	time: { type: Date, default: Date.now }
+//   });
 
 // defining the collection and model
 const Blog = mongoose.models['blogs'] ||

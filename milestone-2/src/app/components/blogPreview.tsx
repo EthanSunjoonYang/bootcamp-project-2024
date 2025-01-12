@@ -1,5 +1,4 @@
 import React from "react";
-import style from "./blogPreview.module.css";
 // import { Blog } from "../blogData";
 import Blog from "../database/blogSchema";
 import Link from "next/link";
