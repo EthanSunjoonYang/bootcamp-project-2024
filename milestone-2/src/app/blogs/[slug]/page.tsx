@@ -4,30 +4,30 @@ import { IComment } from "@/app/database/blogSchema";
 import { Key } from "react";
 
 type Props = {
-  params: { slug: string };
+  params: Promise<{ slug: string }>; // Handle params as a Promise
 };
 
 async function fetchBlog(slug: string): Promise<any> {
   try {
-    // Fetching the blog from an API endpoint
     const res = await fetch(`http://localhost:3000/api/blogs/${slug}`, {
       cache: "no-store",
     });
 
-    // Check if the response is successful
     if (!res.ok) {
       throw new Error("Failed to fetch blog");
     }
 
-    // Return the resolved blog data as a promise
     return res.json();
   } catch (err) {
-    console.log(`Error: ${err}`);
-    return null; // Handle error gracefully
+    console.error(`Error: ${err}`);
+    return null;
   }
 }
 
-export default async function Blogs({ params: { slug } }: Props) {
+export default async function Blogs({ params }: Props) {
+  // Resolve the promise to get the params
+  const { slug } = await params;
+
   // Fetch the blog as a promise
   const blogPromise = fetchBlog(slug);
 
@@ -65,6 +65,7 @@ export default async function Blogs({ params: { slug } }: Props) {
     </div>
   );
 }
+
 
 
 // import Comment from "../../components/comment";
