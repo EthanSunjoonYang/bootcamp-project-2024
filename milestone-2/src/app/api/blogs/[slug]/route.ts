@@ -8,15 +8,31 @@ type IParams = {
 		}
 }
 
-// If { params } looks confusing, check the note below this code block
-export async function GET(req: NextRequest, { params }: IParams) {
-    await connectDB() // function from db.ts before
-		const { slug } = params // another destructure
+export async function GET(req: NextRequest, context: { params: Promise<{ slug: string }> }) {
+    await connectDB(); // Connect to the database
 
-	   try {
-	        const blog = await blogSchema.findOne({ slug }).orFail()
-	        return NextResponse.json(blog)
-	    } catch (err) {
-	        return NextResponse.json('Blog not found.' + ' Error: ' + err, { status: 404 })
-	    }
+    try {
+        // Resolve the promise to get params
+        const { slug } = await context.params;
+
+        // Fetch the blog using the slug
+        const blog = await blogSchema.findOne({ slug }).orFail();
+        return NextResponse.json(blog);
+    } catch (err) {
+        return NextResponse.json('Blog not found.' + ' Error: ' + err, { status: 404 })
+    }
 }
+
+
+// If { params } looks confusing, check the note below this code block
+// export async function GET(req: NextRequest, { params }: IParams) {
+//     await connectDB() // function from db.ts before
+// 		const { slug } = params // another destructure
+
+// 	   try {
+// 	        const blog = await blogSchema.findOne({ slug }).orFail()
+// 	        return NextResponse.json(blog)
+// 	    } catch (err) {
+// 	        return NextResponse.json('Blog not found.' + ' Error: ' + err, { status: 404 })
+// 	    }
+// }
